@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+# 直下のpyprojectは開発用なので無視する
+/poetry.lock
+/pyproject.toml
+
 # Distribution / packaging
 .Python
 build/

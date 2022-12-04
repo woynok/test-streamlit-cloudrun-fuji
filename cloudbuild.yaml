@@ -1,0 +1,46 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - '--no-cache'
+      - '-t'
+      - '$_GCR_HOSTNAME/$PROJECT_ID/${_REPOSITORY}/$_SERVICE_NAME:$COMMIT_SHA'
+      - .
+      - '-f'
+      - Dockerfile
+    id: Build
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - '$_GCR_HOSTNAME/$PROJECT_ID/${_REPOSITORY}/$_SERVICE_NAME:$COMMIT_SHA'
+    id: Push
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    args:
+      - run
+      - services
+      - update
+      - $_SERVICE_NAME
+      - '--platform=managed'
+      - '--image=$_GCR_HOSTNAME/$PROJECT_ID/${_REPOSITORY}/$_SERVICE_NAME:$COMMIT_SHA'
+      - >-
+        --labels=managed-by=gcp-cloud-build-deploy-cloud-run,commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,gcb-trigger-id=$_TRIGGER_ID,$_LABELS
+      - '--region=$_DEPLOY_REGION'
+      - '--quiet'
+    id: Deploy
+    entrypoint: gcloud
+images:
+  - '$_GCR_HOSTNAME/$PROJECT_ID/${_REPOSITORY}/$_SERVICE_NAME:$COMMIT_SHA'
+options:
+  substitutionOption: ALLOW_LOOSE
+substitutions:
+  _LABELS: gcb-trigger-id=8f67faa3-9be7-4b1b-80bf-724b178667fd
+  _TRIGGER_ID: 8f67faa3-9be7-4b1b-80bf-724b178667fd
+  _SERVICE_NAME: moja-practice-cicd-fuji-run
+  _DEPLOY_REGION: asia-northeast1
+  _GCR_HOSTNAME: asia-northeast1-docker.pkg.dev
+  _REPOSITORY: practice-docker-360510
+  _PLATFORM: managed
+tags:
+  - gcp-cloud-build-deploy-cloud-run
+  - gcp-cloud-build-deploy-cloud-run-managed
+  - moja-practice-cicd-fuji-run

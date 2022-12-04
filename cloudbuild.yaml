@@ -4,7 +4,7 @@ steps:
       - build
       # - '--no-cache'
       - '-t'
-      - 'asia-northeast1-docker.pkg.dev/practice-docker-360510/test-streamlit-cloudrun-repository:$COMMIT_SHA'
+      - 'asia-northeast1-docker.pkg.dev/practice-docker-360510/test-streamlit-cloudrun-repository/base-image:$COMMIT_SHA'
       - .
       - '-f'
       - Dockerfile

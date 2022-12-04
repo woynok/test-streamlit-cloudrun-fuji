@@ -32,6 +32,7 @@ images:
   - 'asia-northeast1-docker.pkg.dev/practice-docker-360510/test-streamlit-cloudrun-repository/base-image:$COMMIT_SHA'
 options:
   substitutionOption: ALLOW_LOOSE
+timeout: 900s
 substitutions:
   _LABELS: gcb-trigger-id=8f67faa3-9be7-4b1b-80bf-724b178667fd
   _TRIGGER_ID: 8f67faa3-9be7-4b1b-80bf-724b178667fd

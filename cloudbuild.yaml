@@ -12,7 +12,7 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - asia-northeast1-docker.pkg.dev/practice-docker-360510/test-streamlit-cloudrun-repository:$COMMIT_SHA
+      - asia-northeast1-docker.pkg.dev/practice-docker-360510/test-streamlit-cloudrun-repository/base-image:$COMMIT_SHA
     id: Push
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
     args:
@@ -21,7 +21,7 @@ steps:
       - update
       - $_SERVICE_NAME
       - '--platform=managed'
-      - '--image=asia-northeast1-docker.pkg.dev/practice-docker-360510/test-streamlit-cloudrun-repository:$COMMIT_SHA'
+      - '--image=asia-northeast1-docker.pkg.dev/practice-docker-360510/test-streamlit-cloudrun-repository/base-image:$COMMIT_SHA'
       - >-
         --labels=managed-by=gcp-cloud-build-deploy-cloud-run,commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,gcb-trigger-id=$_TRIGGER_ID,$_LABELS
       - '--region=$_DEPLOY_REGION'
@@ -29,7 +29,7 @@ steps:
     id: Deploy
     entrypoint: gcloud
 images:
-  - 'asia-northeast1-docker.pkg.dev/practice-docker-360510/test-streamlit-cloudrun-repository:$COMMIT_SHA'
+  - 'asia-northeast1-docker.pkg.dev/practice-docker-360510/test-streamlit-cloudrun-repository/base-image:$COMMIT_SHA'
 options:
   substitutionOption: ALLOW_LOOSE
 substitutions:

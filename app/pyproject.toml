@@ -7,6 +7,7 @@ authors = ["woynok <woynok@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.10"
 streamlit = "1.11.1"
+google-cloud-storage = "^2.6.0"
 
 [build-system]
 requires = ["poetry-core"]

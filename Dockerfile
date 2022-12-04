@@ -1,4 +1,4 @@
-FROM 3.10-bullseye as python-base
+FROM python:3.10-bullseye as python-base
 
 RUN curl -sSL https://install.python-poetry.org | python
 WORKDIR /opt/app

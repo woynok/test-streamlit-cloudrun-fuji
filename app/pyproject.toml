@@ -3,13 +3,10 @@ name = "test-streamlit-cloudrun-fuji"
 version = "0.1.0"
 description = ""
 authors = ["woynok <woynok@gmail.com>"]
-readme = "README.md"
-packages = [{include = "test_streamlit_cloudrun_fuji"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 streamlit = "1.11.1"
-
 
 [build-system]
 requires = ["poetry-core"]

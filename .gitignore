@@ -10,6 +10,9 @@ __pycache__/
 /poetry.lock
 /pyproject.toml
 
+# 開発用フォルダ
+/dev
+
 # Distribution / packaging
 .Python
 build/

@@ -18,6 +18,6 @@ RUN find /usr/local/lib/python3.10/site-packages/streamlit -type f \( -iname \*.
 
 # https://github.com/streamlit/streamlit/issues/484
 # https://github.com/UTDNebula/comet-circle/pull/10
-ENTRYPOINT [ "streamlit", "run", "main.py", "--server.port=8080", "--server.address=0.0.0.0", "--server.maxMessageSize=20", "--server.enableCORS=False", "--server.enableXsrfProtection=False" ]
+ENTRYPOINT [ "streamlit", "run", "main.py", "--server.port=8080", "--server.address=0.0.0.0", "--health-check-url=health-check", "--server.enableCORS=False", "--server.enableXsrfProtection=False" ]
 
 EXPOSE 8080
